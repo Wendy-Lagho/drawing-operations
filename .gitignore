@@ -1,0 +1,4 @@
+# Root .gitignore
+output_images/*
+__pycache__/
+.idea/
