@@ -65,7 +65,7 @@ def draw_line(
        """
     context.move_to(*start_coordinates)
     context.line_to(*end_coordinates)
-    fill_and_stroke(context, fill=False, stroke=True, stroke_color=line_color, line_width=line_width)
+    fill_and_stroke(context, fill = False, stroke = True, stroke_color = line_color, line_width = line_width)
 
 def draw_polygon(
         context,
@@ -103,7 +103,13 @@ def draw_polygon(
     fill_and_stroke(context, fill, stroke, fill_color, stroke_color, line_width)
 
 
-def draw_arc(context: cairo.Context, coordinates, radius, angles, color, line_width):
+def draw_arc(
+        context: cairo.Context,
+        coordinates,
+        radius,
+        angles,
+        color,
+        line_width):
     """
     Draws an arc.
     :param context: a cairo.Context object
@@ -115,7 +121,41 @@ def draw_arc(context: cairo.Context, coordinates, radius, angles, color, line_wi
     :return: None
     """
     context.arc(*coordinates, radius, *angles)
-    fill_and_stroke(context, stroke=True, stroke_color=color, line_width=line_width)
+    fill_and_stroke(context, stroke = True, stroke_color = color, line_width = line_width)
+
+
+def draw_bezier(
+        context: cairo.Context,
+        start_coordinates,
+        bezier_points1,
+        bezier_points2,
+        line_coordinates1,
+        line_coordinates2,
+        line_color,
+        line_width
+):
+    """
+    Draws a bezier.
+    :param context: a cairo.Context object
+    :param start_coordinates: the coordinates of the start of the bezier
+    :param bezier_points1: the coordinates of the bezier
+    :param bezier_points2: the coordinates of the bezier
+    :param line_coordinates1: the coordinates of the start of the line
+    :param line_coordinates2: the coordinates of the end of the line
+    :param line_color: color of the bezier
+    :param line_width: the width of the bezier
+    :return: None
+    """
+    context.move_to(*start_coordinates)
+    context.curve_to(*bezier_points1)
+    context.line_to(*line_coordinates1)
+    context.curve_to(*bezier_points2)
+    context.line_to(*line_coordinates2)
+    context.close_path()
+    context.set_dash([30, 20])
+    fill_and_stroke(context, fill = False, stroke = True, stroke_color = line_color, line_width = line_width)
+
+
 
 
 def fill_and_stroke(
@@ -163,3 +203,22 @@ def fill_and_stroke(
 
     else:
         raise ValueError("Either fill or stroke (or both) must be specified.")
+
+
+    """
+    Draw a circle, 
+    Draw a line
+    
+    
+    set width
+    set source
+    draw an arc
+    fill
+    move
+    arc
+    line
+    
+    try mirroring
+    """
+
+    
