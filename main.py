@@ -9,6 +9,7 @@ OUTPUT_DIR = 'output_images/'
 WIDTH, HEIGHT = 700, 700
 BACKGROUND_COLOR = (0.9, 0.9, 0.9)
 
+
 def main(shape_type):
     surface, context = create_surface(WIDTH, HEIGHT, BACKGROUND_COLOR)
     match shape_type:
